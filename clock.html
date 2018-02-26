@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="font_files/walkway_regular/stylesheet.css" type="text/css">
+	<!--script src="clock.js"></script-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body onload="drawNumbers()">
+	<div class="clock">
+		<div class="numbers-container">
+			<canvas id="canvas"></canvas>
+		</div>
+		<div class="ccenter"></div>
+		<div class="hours-container">
+			<div class="hours"></div>
+		</div>
+		<div class="minutes-container">
+			<div class="minutes"></div>
+		</div>
+		<div class="seconds-container">
+			<div class="seconds"></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function drawNumbers()
+		{
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			var FONT_CONSTANT_1 = "walkwayregular";
+			canvas.width = window.innerWidth;
+  		canvas.height = window.innerHeight;
+			var radius = canvas.height / 2;
+			var ang;
+			ctx.translate(radius, radius);
+			ctx.font = "normal normal lighter " + radius * 0.25 + "px " + FONT_CONSTANT_1;
+      ctx.textBaseline = "middle";
+      ctx.textAlign = "center";
+			var num;
+			for(num = 1; num < 13; num = num + 1)
+      {
+        ang = num * Math.PI / 6;
+        ctx.rotate(ang);
+        ctx.translate(0, -radius * 0.85);
+        ctx.rotate(-ang);
+        ctx.fillText(num, 0, 0);
+        ctx.rotate(ang);
+        ctx.translate(0, radius * 0.85);
+        ctx.rotate(-ang);
+      }
+		}
+	</script>
+	<script type="text/javascript">
+		$(function(){
+		  $('.clock').css({ height: $(window).innerHeight() });
+		  $('.clock').css({ width: $(window).innerHeight() });
+			$(drawNumbers());
+		  $(window).resize(function(){
+			$('.clock').css({ height: $(window).innerHeight() });
+			$('.clock').css({ width: $(window).innerHeight() });
+			$(drawNumbers());
+		  });
+		});
+	</script>
+	<script type="text/javascript">
+		// window.onload = initLocalClocks();
+		$(function () {
+		  // get the local time using JS
+		  var date = new Date;
+		  var seconds = date.getSeconds();
+		  var minutes = date.getMinutes();
+		  var hours = date.getHours();
+		  // create an object with each hand and its angle in degrees
+		  var hands = [
+			{
+			  hand: 'hours',
+			  angle: (hours * 30) + (minutes / 2)
+			},
+			{
+			  hand: 'minutes',
+			  angle: (minutes * 6)
+			},
+			{
+			  hand: 'seconds',
+			  angle: (seconds * 6)
+			}
+		  ];
+		  // loop through each of these hands to set their angle
+		  for (var j = 0; j < hands.length; j++)
+			{
+				var elements = document.querySelectorAll('.' + hands[j].hand);
+				for (var k = 0; k < elements.length; k++)
+				{
+					elements[k].style.OTransform = 'rotate('+ hands[j].angle +'deg)';
+					elements[k].style.webkitTransform = 'rotateZ('+ hands[j].angle +'deg)';
+					elements[k].style.transform = 'rotateZ('+ hands[j].angle +'deg)';
+					// if this is a minute hand, note the seconds position (to calculate minute position later)
+					if (hands[j].hand === 'minutes')
+					{
+				  	elements[k].parentNode.setAttribute('data-second-angle', hands[j + 1].angle);
+					}
+				}
+		  }
+		});
+	</script>
+</body>
+</html>

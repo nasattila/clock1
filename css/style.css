@@ -1,0 +1,160 @@
+/* html {
+	zoom: 0.72;
+	-o-transform: scale(0.72);
+	-webkit-transform: scale(0.72);
+	transform: scale(0.72);
+} */
+
+body {
+	margin: 0 auto;
+	padding: 0;
+	overflow: hidden;
+	cursor: none;
+}
+
+canvas {
+	font-family: "walkwayregular";
+	font-weight: bolder;
+	font-variant: small-caps;
+	z-index: 2;
+}
+
+.clock {
+	max-width: 100%;
+	border-radius: 50%;
+	background: #fff url("../images/logo1.jpg") no-repeat center;
+	background-size: 100%;
+	display: block;
+	position: relative;
+	left: 50%;
+	-o-transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
+
+.ccenter {
+	background-size: contain;
+	background-position: center, center;
+	background-repeat: no-repeat;
+	background-image: url("../images/center_1_transparent.png");
+	border-radius: 50%;		
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-o-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	width: 5%;
+	height: 5%;
+	z-index: 10;
+}
+
+.minutes-container, .hours-container, .seconds-container, .numbers-container {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.hours {
+	background-image: url("../images/hour_hand_transparent.png");
+	background-size: contain;
+	background-position: center, center;
+	background-repeat: no-repeat;	
+	height: 30%;
+	position: absolute;
+	left: 30%; /* 30%; */
+	top: 22%; /* 22%; */
+	-o-transform-origin: 50% 94.6%;
+	-webkit-transform-origin: 50% 94.6%;
+	transform-origin: 50% 94.6%;
+	width: 40%;
+	z-index: 4;
+}
+
+.minutes {
+	background-image: url("../images/minute_hand_transparent_edited.png");
+	background-size: contain;
+	background-position: center, center;
+	background-repeat: no-repeat;		
+	height: 45%;
+	position: absolute;
+	left: 20%; /* 20%; */
+	top: 7%; /* 13.5%; */
+	-o-transform-origin: 50% 96%; /* 65.1%; */
+	-webkit-transform-origin: 50% 96%; /* 65.1%; */
+	transform-origin: 50% 96%; /* 65.1%; */
+	width: 60%;
+	z-index: 6;
+}
+
+.seconds {
+	background-image: url("../images/second_hand_transparent.png");
+	background-size: contain;
+	background-position: center, center;
+	background-repeat: no-repeat;
+	height: 40%;
+	position: absolute;
+	left: 10%;
+	top: 10%;
+	-o-transform-origin: 50% 100%;
+	-webkit-transform-origin: 50% 100%;
+	transform-origin: 50% 100%;
+	width: 80%;
+	z-index: 8;
+}
+
+@-o-keyframes rotate {
+	100% {
+		-o-transform: rotate(360deg);
+	}
+}
+
+@-webkit-keyframes rotate {
+	100% {
+		-webkit-transform: rotateZ(360deg);
+	}
+}
+
+@keyframes rotate {
+	100% {
+		transform: rotateZ(360deg);
+	}
+}
+
+.hours-container {
+	-o-animation: rotate 43200s infinite linear;
+	-webkit-animation: rotate 43200s infinite linear;
+	animation: rotate 43200s infinite linear;
+}
+
+/* continous movement: */
+.minutes-container {
+	-o-animation: rotate 3600s infinite linear;
+	-webkit-animation: rotate 3600s infinite linear;
+	animation: rotate 3600s infinite linear;
+}
+
+/*
+.seconds-container {
+	-o-animation: rotate 60s infinite linear;
+	-webkit-animation: rotate 60s infinite linear;
+	animation: rotate 60s infinite linear;
+}
+*/
+
+/* step by step movement: */
+/*
+.minutes-container {
+	-o-animation: rotate 3600s infinite steps(60);
+	-webkit-animation: rotate 3600s infinite steps(60);
+	animation: rotate 3600s infinite steps(60);
+}
+*/
+
+.seconds-container {
+	-o-animation: rotate 60s infinite steps(60);
+	-webkit-animation: rotate 60s infinite steps(60);
+	animation: rotate 60s infinite steps(60);
+}
